@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda tu Cita - VetCare + Oncopets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=IBM+Plex+Sans:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #012b81;
+            --secondary: #3CCAFF;
+            --accent: #FF9B1B;
+            --bg: #f7f7ff;
+            --text: #292faa;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Nunito Sans', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        h1, h2 { font-family: 'IBM Plex Sans', sans-serif; color: var(--primary); }
+
+        .container { width: 90%; max-width: 1000px; margin: 40px auto; }
+        
+        .appointment-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .header-citas { text-align: center; margin-bottom: 40px; }
+        .header-citas p { color: #686e73; font-size: 1.1rem; }
+
+        /* GRID PRINCIPAL */
+        .booking-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        /* CALENDARIO ESTILIZADO */
+        .calendar-box h3 { margin-bottom: 15px; font-size: 1.2rem; }
+        .calendar {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .cal-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            padding: 10px;
+            text-align: center;
+        }
+        .day-name { font-weight: 700; font-size: 0.8rem; padding: 10px 0; color: #888; }
+        .day {
+            padding: 12px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+        .day:hover:not(.empty) { background: var(--secondary); color: white; }
+        .day.selected { background: var(--accent) !important; color: white; }
+        .day.disabled { color: #ccc; cursor: not-allowed; }
+        .empty { cursor: default; }
+
+        /* HORARIOS */
+        .time-box h3 { margin-bottom: 15px; font-size: 1.2rem; }
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .slot {
+            padding: 10px;
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .slot:hover { background: var(--primary); color: white; }
+        .slot.selected { background: var(--primary); color: white; }
+        .slot.unavailable { background: #f0f0f0; border-color: #ddd; color: #aaa; cursor: not-allowed; }
+
+        /* FORMULARIO */
+        .form-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .input-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        label { font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
+        input, select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .btn-confirm {
+            grid-column: span 2;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .btn-confirm:hover { background: var(--primary); transform: translateY(-2px); }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .booking-grid, .form-grid { grid-template-columns: 1fr; }
+            .btn-confirm { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="appointment-card">
+        <div class="header-citas">
+            <h1>Agenda tu Consulta Especializada</h1>
+            <p>Selecciona una fecha y horario para la atención de tu mascota.</p>
+        </div>
+
+        <div class="booking-grid">
+            <div class="calendar-box">
+                <h3>1. Selecciona el día (Abril 2026)</h3>
+                <div class="calendar">
+                    <div class="cal-header">
+                        <span>&lt;</span>
+                        <span>Abril 2026</span>
+                        <span>&gt;</span>
+                    </div>
+                    <div class="cal-grid">
+                        <div class="day-name">LU</div><div class="day-name">MA</div><div class="day-name">MI</div>
+                        <div class="day-name">JU</div><div class="day-name">VI</div><div class="day-name">SA</div>
+                        <div class="day-name">DO</div>
+                        
+                        <div class="day empty"></div><div class="day empty"></div>
+                        <div class="day" onclick="selectDay(this)">1</div><div class="day" onclick="selectDay(this)">2</div>
+                        <div class="day" onclick="selectDay(this)">3</div><div class="day disabled">4</div><div class="day disabled">5</div>
+                        <div class="day" onclick="selectDay(this)">6</div><div class="day" onclick="selectDay(this)">7</div>
+                        <div class="day selected" onclick="selectDay(this)">8</div><div class="day" onclick="selectDay(this)">9</div>
+                        <div class="day" onclick="selectDay(this)">10</div><div class="day disabled">11</div><div class="day disabled">12</div>
+                        <div class="day" onclick="selectDay(this)">13</div><div class="day" onclick="selectDay(this)">14</div>
+                        <div class="day" onclick="selectDay(this)">15</div><div class="day" onclick="selectDay(this)">16</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="time-box">
+                <h3>2. Horarios Disponibles</h3>
+                <div class="time-slots">
+                    <div class="slot" onclick="selectSlot(this)">11:00 AM</div>
+                    <div class="slot" onclick="selectSlot(this)">12:00 PM</div>
+                    <div class="slot" onclick="selectSlot(this)">01:00 PM</div>
+                    <div class="slot unavailable">03:00 PM</div>
+                    <div class="slot" onclick="selectSlot(this)">04:00 PM</div>
+                    <div class="slot" onclick="selectSlot(this)">05:00 PM</div>
+                    <div class="slot selected" onclick="selectSlot(this)">06:00 PM</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>3. Información de Registro</h3>
+            <form class="form-grid">
+                <div class="input-group">
+                    <label>Nombre del Dueño</label>
+                    <input type="text" placeholder="Ej. Juan Pérez" required>
+                </div>
+                <div class="input-group">
+                    <label>Nombre de la Mascota</label>
+                    <input type="text" placeholder="Ej. Toby" required>
+                </div>
+                <div class="input-group">
+                    <label>Teléfono de Contacto</label>
+                    <input type="tel" placeholder="55 0000 0000" required>
+                </div>
+                <div class="input-group">
+                    <label>Tipo de Servicio</label>
+                    <select>
+                        <option>Oncología (Dr. Celis)</option>
+                        <option>Consulta General</option>
+                        <option>Cirugía / Ortopedia</option>
+                        <option>Medicina Interna</option>
+                    </select>
+                </div>
+                <button type="button" class="btn-confirm" onclick="alert('¡Cita solicitada! Nos pondremos en contacto contigo para confirmar.')">
+                    Confirmar Reservación
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function selectDay(element) {
+        if(element.classList.contains('disabled')) return;
+        document.querySelectorAll('.day').forEach(d => d.classList.remove('selected'));
+        element.classList.add('selected');
+    }
+
+    function selectSlot(element) {
+        document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+        element.classList.add('selected');
+    }
+</script>
+
+</body>
+</html>

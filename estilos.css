@@ -1,0 +1,125 @@
+ /* ================= VARIABLES Y RESET ================= */
+        :root {
+            --primary-color: #012b81;
+            --secondary-color: #3CCAFF; 
+            --accent-color: #FF9B1B; 
+            --bg-light: #f7f7ff;
+            --text-dark: #292faa;
+            --text-gray: #4b4d75;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Nunito Sans', sans-serif; 
+            background: linear-gradient(135deg, rgba(1, 43, 129, 0.8), rgba(60, 202, 255, 0.8)), url('https://images.unsplash.com/photo-1543322748-33df6d3db806?auto=format&fit=crop&w=1200&q=80') center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-dark);
+        }
+
+        /* ================= CONTENEDOR LOGIN ================= */
+        .auth-container {
+            background: #fff;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .auth-header {
+            text-align: center;
+            padding: 30px 20px 20px;
+        }
+
+        .auth-header h1 {
+            font-family: 'IBM Plex Sans', sans-serif;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+        .auth-header h1 span { color: var(--accent-color); }
+
+        /* ================= PESTAÑAS ================= */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+        }
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text-gray);
+            transition: 0.3s;
+        }
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        /* ================= FORMULARIOS ================= */
+        .form-box {
+            padding: 30px;
+            display: none;
+        }
+        .form-box.active { display: block; }
+
+        .input-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .input-group label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        .input-group input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        .input-group input:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .btn-submit:hover { background: var(--accent-color); }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            text-decoration: underline;
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultorio Veterinario Patitas Sanas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=IBM+Plex+Sans:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ================= VARIABLES Y RESET ================= */
+        :root {
+            --primary-color: #012b81;
+            --secondary-color: #3CCAFF; 
+            --accent-color: #FF9B1B; 
+            --bg-light: #f7f7ff;
+            --text-dark: #292faa;
+            --text-gray: #4b4d75;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: #fff;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'IBM Plex Sans', sans-serif;
+            color: var(--primary-color);
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ================= NAVEGACIÓN ================= */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo span { color: var(--accent-color); }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--secondary-color); }
+
+        .btn-contacto {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: background 0.3s;
+        }
+
+        .btn-contacto:hover { background-color: var(--accent-color); }
+
+        /* ================= HERO SECTION ================= */
+        .hero {
+            background: linear-gradient(to right, rgba(1, 43, 129, 0.8), rgba(1, 43, 129, 0.6)), url('https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80') center/cover;
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 15px;
+        }
+
+        .hero .horario {
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            margin-bottom: 30px; 
+            color: var(--accent-color);
+        }
+
+        /* ================= SERVICIOS (GRID) ================= */
+        .servicios {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .grid-servicios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .card:hover { transform: translateY(-10px); }
+        .card h3 { margin-bottom: 15px; color: var(--primary-color); }
+        .card p { color: var(--text-gray); }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 50px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-grid h3 { color: #fff; margin-bottom: 15px; }
+        .footer-grid p, .footer-grid a { color: #ccc; margin-bottom: 5px; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* ================= WHATSAPP FLOTANTE ================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* ================= RESPONSIVO ================= */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">Patitas<span> Sanas</span></div>
+            <nav class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#contacto">Contacto</a>
+                <a href="login.html" style="color: var(--accent-color); font-weight: 700;">Ingresar 👤</a>
+            </nav>
+            <a href="tel:5536317711" class="btn-contacto">Llamar: 55 3631 7711</a>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="container">
+            <h1>Consultorio Veterinario Patitas Sanas</h1>
+            <p>Ciencia para curarlos, corazón para cuidarlos. Brindamos consultas generales, vacunación y medicina preventiva en un ambiente cálido y seguro para los consentidos de la casa.</p>
+            <p class="horario">Horario de atención: 11:00 am a 6:00 pm</p>
+            <a href="login.html" class="btn-contacto" style="background-color: var(--accent-color);">¡Agenda tu cita ahora!</a>
+        </div>
+    </section>
+
+    <section id="servicios" class="servicios">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="grid-servicios">
+                <div class="card">
+                    <h3>Consulta General</h3>
+                    <p>Revisión médica completa para detectar y tratar malestares cotidianos a tiempo, asegurando la salud de tu mejor amigo.</p>
+                </div>
+                <div class="card">
+                    <h3>Vacunación y Desparasitación</h3>
+                    <p>Protegemos a tu mascota de virus y parásitos internos y externos para que crezca fuerte y sana en todas sus etapas.</p>
+                </div>
+                <div class="card">
+                    <h3>Medicina Preventiva</h3>
+                    <p>Chequeos de rutina, asesoría nutricional y control de peso para prevenir enfermedades y garantizar su bienestar a largo plazo.</p>
+                </div>
+                <div class="card">
+                    <h3>Estudios de Laboratorio</h3>
+                    <p>Toma de muestras para análisis de sangre, orina y estudios coprológicos básicos para un diagnóstico oportuno.</p>
+                </div>
+                <div class="card">
+                    <h3>Farmacia Veterinaria</h3>
+                    <p>Contamos con los medicamentos y suplementos de patente necesarios para iniciar el tratamiento de tu mascota de inmediato.</p>
+                </div>
+                <div class="card">
+                    <h3>Estética Básica</h3>
+                    <p>Baños medicados, corte de uñas y limpieza de oídos para que luzcan increíbles y mantengan una excelente higiene.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container footer-grid">
+            <div>
+                <h3>Horarios de Servicio</h3>
+                <p>Lunes a Sábado: 11:00 am a 6:00 pm</p>
+                <p>Domingo: Cerrado</p>
+            </div>
+            <div>
+                <h3>Contacto</h3>
+                <p>Teléfono: 55 3631 7711</p>
+                <p>Email: hola@patitassanas.mx</p>
+            </div>
+            <div>
+                <h3>Ubicación</h3>
+                <p>Nos encontramos dentro del "Hospital para Mascotas Ixtacala", Avenida de los Barrios #220, Los Reyes Iztacala, Tlalnepantla de Baz, Estado de México.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright © 2026 Consultorio Veterinario Patitas Sanas. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <a href="https://api.whatsapp.com/send/?phone=5215536317711&text=Hola,%20quisiera%20agendar%20una%20cita%20para%20mi%20mascota." class="whatsapp-float" target="_blank" title="Contáctanos por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+    </a>
+
+</body>
+</html>
